@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 
 namespace SAESchedule
 {
@@ -15,6 +16,7 @@ namespace SAESchedule
     /// <summary>
     /// A User is a Person which can have Shifts
     /// </summary>
+    [System.Serializable]
     public sealed class User
     {
 

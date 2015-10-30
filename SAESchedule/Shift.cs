@@ -5,13 +5,54 @@ using System.Collections.Generic;
 namespace SAESchedule
 {
 
+    [System.Serializable]
     public sealed class Shift
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+        public enum UserShiftPreference : byte
+        {
+            NO_WORK = 0,
+            ONLY_IF_NECESSARY = 1,
+            MAYBE = 2,
+            PREFERRED = 4
+        }
+
+        /// <summary>
+        /// Contains the Settings a User has for this shift
+        /// </summary>
+        public sealed class UserShift
+        {
+
+            /// <summary>
+            /// The User this settings belong to
+            /// </summary>
+            public readonly string User;
+
+            /// <summary>
+            /// The Preference of the user regarding this shift
+            /// </summary>
+            public readonly UserShiftPreference Preference;
+
+            public UserShift(string _user, UserShiftPreference _preference)
+            {
+                User = _user;
+                Preference = _preference;
+            }
+
+        }
+
+        /// <summary>
         /// The User who will work
         /// </summary>
-        public readonly string UserID;
+        public string UserID;
+
+        /// <summary>
+        /// Contains all possible users for this shift
+        /// </summary>
+        public List<UserShift> possibleUsers;
 
         /// <summary>
         /// The Faculty of the Shift, e.g. Art, Prog, ...
@@ -31,7 +72,7 @@ namespace SAESchedule
         /// <summary>
         /// The Time in hours the User is working
         /// </summary>
-        public float Hours { get { return (end - begin).Hours; } }
+        public int Hours { get { return (end - begin).Hours; } }
 
         public Shift(string _userID, string _shiftFaculty, DateTime _begin, DateTime _end)
         {
