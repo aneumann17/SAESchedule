@@ -29,6 +29,16 @@ namespace SAESchedule
         public readonly string GivenName;
 
         /// <summary>
+        /// The Users faculty. e.g. Art, Prog, ...
+        /// </summary>
+        public readonly string Faculty;
+
+        /// <summary>
+        /// A unique ID for the User
+        /// </summary>
+        public string ID { get { return string.Format("USER_{0}_{1}", LastName, GivenName).ToLower();} }
+
+        /// <summary>
         /// The Name used in the Shifts for the Infoscreen
         /// Example: Lukas is Lukas K because of Lukas Lambrecht
         /// </summary>
@@ -49,10 +59,11 @@ namespace SAESchedule
         /// </summary>
         public float HourlySalary { get { return ((float)SalaryType) / 10.0f; } }
 
-        public User(string _lastName, string _givenName, string _shiftID, float _maxRevenue, SalaryType _salaryType)
+        public User(string _lastName, string _givenName, string _faculty, string _shiftID, float _maxRevenue, SalaryType _salaryType)
         {
             this.LastName = _lastName;
             this.GivenName = _givenName;
+            this.Faculty = _faculty;
             this.ShiftID = _shiftID;
             this.MaxRevenue = _maxRevenue;
             this.SalaryType = _salaryType;
@@ -65,8 +76,8 @@ namespace SAESchedule
         /// <returns></returns>
         public void ChangeShiftID(string _newShiftID)
         {
+            // set the new value
             ShiftID = _newShiftID;
-            // TODO: Probably change some things in the Calendar
         }
 
         /// <summary>
@@ -75,8 +86,11 @@ namespace SAESchedule
         /// <param name="_newMaxRevenue"></param>
         public void ChangeMaxRevenue(float _newMaxRevenue)
         {
+            // set the new value
             MaxRevenue = _newMaxRevenue;
-            // TODO: Recalc the shifts
+
+            // recalculate the shifts
+            ShiftScheduler.Calculate();
         }
 
         /// <summary>
@@ -85,8 +99,11 @@ namespace SAESchedule
         /// <param name="_newSalaryType"></param>
         public void ChangeSalaryType(SalaryType _newSalaryType)
         {
+            // set the new value
             SalaryType = _newSalaryType;
-            // TODO: Recalc shifts
+
+            // recalculate the shifts
+            ShiftScheduler.Calculate();
         }
 
     }
