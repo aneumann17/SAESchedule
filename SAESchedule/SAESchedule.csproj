@@ -57,7 +57,9 @@
     <Compile Include="Shift.cs" />
     <Compile Include="ShiftScheduler.cs" />
     <Compile Include="ShiftSettings.cs" />
+    <Compile Include="StaffPreferences.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserTimeSpanPreference.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

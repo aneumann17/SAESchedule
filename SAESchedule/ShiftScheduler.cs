@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Linq;
 
+
 namespace SAESchedule
 {
 
@@ -18,6 +19,11 @@ namespace SAESchedule
         /// The current month
         /// </summary>
         private static Month Current;
+
+        /// <summary>
+        /// The Preferences of all Staff members
+        /// </summary>
+        private static StaffPreferences Preferences;
 
         /// <summary>
         /// A List which contains all months
@@ -70,6 +76,11 @@ namespace SAESchedule
             // generate new shifts
             Current.GenerateShifts(settings);
 
+
+            // Apply the Preferences of the Staff to the Current Month
+            Preferences.ApplyPreferences( Current );
+
+
             Dictionary<string, int> hourDictionary = new Dictionary<string,int>();
 
             // iterate over all shifts
@@ -78,6 +89,11 @@ namespace SAESchedule
                 // calculate the shift
                 CalculateShift(shift, ref hourDictionary);
             }
+        }
+
+        public static void ExportShifts()
+        {
+
         }
 
         private static void CalculateShift(Shift _shift, ref Dictionary<string, int> _hours)

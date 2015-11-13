@@ -13,7 +13,7 @@ namespace SAESchedule
 
         public readonly int Year;
 
-        public readonly int Month;
+        public readonly int m_Month;
 
         /// <summary>
         /// all shifts in this month
@@ -23,7 +23,7 @@ namespace SAESchedule
         public Month(int _year, int _month, ShiftSettings _settings)
         {
             Year = _year;
-            Month = _month;
+            m_Month = _month;
             shifts = new List<Shift>();
 
             GenerateShifts(_settings);
@@ -40,10 +40,10 @@ namespace SAESchedule
             shifts.Clear();
 
             // for each day in the month
-            for(int i = 0; i < DateTime.DaysInMonth(Year, Month); ++i)
+            for (int i = 0; i < DateTime.DaysInMonth( Year, m_Month ); ++i)
             {
                 // get the day
-                DateTime day = new DateTime(Year, Month, i);
+                DateTime day = new DateTime( Year, m_Month, i );
 
                 // check if should be a shift on the day
                 if (day.DayOfWeek == DayOfWeek.Sunday) { continue; }

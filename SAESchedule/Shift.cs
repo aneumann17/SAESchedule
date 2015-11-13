@@ -82,6 +82,37 @@ namespace SAESchedule
             end = _end;
         }
 
+        /// <summary>
+        /// Checks if the given Time is within the Shift
+        /// </summary>
+        /// <param name="p_Time"></param>
+        /// <returns></returns>
+        public bool ContainsTimeStamp( DateTime p_Time )
+        {
+            if (p_Time <= begin)
+                return false;
+
+            if (p_Time >= end)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if the given TimeWindow overlaps this Shift
+        /// </summary>
+        /// <param name="p_TimeSpan"></param>
+        /// <returns></returns>
+        public bool ContainsTimeSpan( DateTime p_Start, DateTime p_End )
+        {
+            if (p_End <= begin)
+                return false;
+
+            if (p_Start >= end)
+                return false;
+
+            return true;
+        }
     }
 
 }
